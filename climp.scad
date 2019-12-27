@@ -1,4 +1,18 @@
 
+screw_hole_radius = 2.1;
+
+module rounded_box(l, w, h) {
+    cylinder(h, w/2, w/2, $fn = 20);
+    
+    translate([l - w, 0, 0]) {
+        cylinder(h, w/2, w/2, $fn = 20);
+    }
+    
+    translate([0, -w/2, 0]) {
+        cube([l-w, w, h]);
+    }
+}
+
 module body() {
     difference() {
         union() {
@@ -13,10 +27,6 @@ module body() {
                     cylinder(4, 20, 20);
                 }
             }
-        }
-        
-        translate([20, 0, 0]) {
-            cylinder(4, 2, 2, $fn = 20);
         }
     }
 }
@@ -33,6 +43,7 @@ module body_sides() {
 }
 
 
+
 translate([46, 0, 0]) {
     translate([0, 5, 0]){
         body_sides();
@@ -42,7 +53,13 @@ translate([46, 0, 0]) {
     }
 }
     
-body();
+
+difference() {
+    body();
+    translate([20, 0, 0]) {
+        cylinder(4, screw_hole_radius, screw_hole_radius, $fn = 20);
+    }
+}
 
 translate ([0, 20, 0]) {
     color([0, 1, 0]){
@@ -53,6 +70,10 @@ translate ([0, 20, 0]) {
                     cylinder (10, 1, 1, $fn = 20);
                 }
             }
+            
+            translate([20, 0, 0]) {
+                rounded_box(6, 4.1, 4);
+            }          
         }
     }
 }
