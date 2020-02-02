@@ -71,8 +71,8 @@ translate ([0, 20, 0]) {
                 }
             }
             
-            translate([20, 0, 0]) {
-                rounded_box(6, 4.1, 4);
+            translate([20 - 4, 0, 0]) {
+                rounded_box(8, 4.1, 4);
             }          
         }
     }
